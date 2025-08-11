@@ -1,0 +1,348 @@
+2025-08-11 17:07:50 [-][-][-][error][yii\console\UnknownCommandException] yii\base\InvalidRouteException: Unable to resolve the request "--serve". in C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Module.php:564
+Stack trace:
+#0 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction()
+#1 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction()
+#2 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Application.php(387): yii\console\Application->handleRequest()
+#3 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\cyii(20): yii\base\Application->run()
+#4 {main}
+
+Next yii\console\UnknownCommandException: Unknown command "--serve". in C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php:183
+Stack trace:
+#0 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction()
+#1 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Application.php(387): yii\console\Application->handleRequest()
+#2 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\cyii(20): yii\base\Application->run()
+#3 {main}
+2025-08-11 17:07:50 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'PSExecutionPolicyPreference' => 'Bypass'
+    'USERDOMAIN_ROAMINGPROFILE' => 'WIN-AES0PPPIA2C'
+    'PROCESSOR_LEVEL' => '6'
+    'POWERSHELL_CUSTOM' => 'C:\\Users\\user\\Documents\\Powershell'
+    'SESSIONNAME' => 'Console'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'GATEWAY_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\gateway.vmoptions'
+    'PSModulePath' => 'C:\\Users\\user\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'RUSTROVER_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rustrover.vmoptions'
+    'SystemDrive' => 'C:'
+    'RIDER_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rider.vmoptions'
+    'USERNAME' => 'user'
+    'DEVECOSTUDIO_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\devecostudio.vmoptions'
+    'STUDIO_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\studio.vmoptions'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'POSH_THEMES_PATH' => 'C:\\Program Files (x86)\\oh-my-posh\\themes\\'
+    'DATASPELL_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\dataspell.vmoptions'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramW6432' => 'C:\\Program Files'
+    'DOTNET_ROOT' => 'C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current'
+    'HOMEPATH' => '\\Users\\user'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 154 Stepping 3, GenuineIntel'
+    'ProgramFiles' => 'C:\\Program Files'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'windir' => 'C:\\WINDOWS'
+    'EFC_13476_1592913036' => '1'
+    'ZES_ENABLE_SYSMAN' => '1'
+    'DATAGRIP_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\datagrip.vmoptions'
+    'POSH_INSTALLER' => 'manual'
+    'IGCCSVC_DB' => 'AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAqR18NgeA3EG5n8Iy+rwumAQAAAACAAAAAAAQZgAAAAEAACAAAACZCyjpm8p6WWGQYwZmcw8GTV2FrR5eDsYXGKBEVJ7TDwAAAAAOgAAAAAIAACAAAAANFu36ANQGmy6ib2H47v8TSiq7R2JCiBNeHq17lxQsHGAAAACfTjgAYirpwnl867e3k/6GksCHGQ4cRxdkQXO7T9MZvZxz+tHxO9vzS6OUf4rqIIV0WOgvcZwpw8XSFU0NFcqrSLhYbDffs1JrTuS7A5y5Xf/PRvcITRA5AiB6DP1x1dVAAAAAyxqelje12OL5N7AQOxpvwmTIbgD1eKMEJcgmi+ZgiUVcuh3Bk5qHVEbLzQpsFR3Bg+hPyeRd4wC8o8BrRMj4fw=='
+    'PHP_INI_SCAN_DIR' => 'C:\\Users\\user\\scoop\\apps\\php\\current\\cli;C:\\Users\\user\\scoop\\apps\\php\\current\\cli\\conf.d;'
+    'LOCALAPPDATA' => 'C:\\Users\\user\\AppData\\Local'
+    'ChocolateyLastPathUpdate' => '133840961734730382'
+    'MSBuildSDKsPath' => 'C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current\\sdk\\8.0.413\\Sdks'
+    'USERDOMAIN' => 'WIN-AES0PPPIA2C'
+    'LOGONSERVER' => '\\\\WIN-AES0PPPIA2C'
+    'PYCHARM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\pycharm.vmoptions'
+    'WEBSTORM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\webstorm.vmoptions'
+    'JAVA_HOME' => 'C:\\Users\\user\\scoop\\apps\\temurin23-jdk\\current'
+    'CLION_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\clion.vmoptions'
+    'JETBRAINSCLIENT_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\jetbrainsclient.vmoptions'
+    'COMPOSER_HOME' => 'C:\\Users\\user\\scoop\\persist\\composer\\home'
+    'GRADLE_HOME' => 'C:\\ProgramData\\chocolatey\\lib\\gradle\\tools\\gradle-8.12.1'
+    'GOLAND_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\goland.vmoptions'
+    'OneDrive' => 'C:\\Users\\user\\OneDrive'
+    'APPDATA' => 'C:\\Users\\user\\AppData\\Roaming'
+    'IDEA_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\idea.vmoptions'
+    'AQUA_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\aqua.vmoptions'
+    'RUBYMINE_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rubymine.vmoptions'
+    'ChocolateyInstall' => 'C:\\ProgramData\\chocolatey'
+    'JETBRAINS_CLIENT_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\jetbrains_client.vmoptions'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'Path' => 'C:\\Users\\user\\scoop\\shims;C:\\Program Files (x86)\\oh-my-posh\\bin\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;C:\\windows\\system32\\HWAudioDriver\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.9\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\WireGuard\\;C:\\Users\\user\\scoop\\apps\\composer\\current\\home\\vendor\\bin;C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current;C:\\Users\\user\\scoop\\apps\\nodejs-lts\\current\\bin;C:\\Users\\user\\scoop\\apps\\nodejs-lts\\current;C:\\Users\\user\\scoop\\apps\\temurin23-jdk\\current\\bin;C:\\Users\\user\\scoop\\shims;C:\\Users\\user\\AppData\\Local\\Microsoft\\WindowsApps;C:\\ProgramData\\chocolatey\\bin;C:\\Users\\user\\AppData\\Local\\JetBrains\\Toolbox\\scripts;C:\\Users\\user\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\user\\.dotnet\\tools'
+    'OS' => 'Windows_NT'
+    'COMPUTERNAME' => 'WIN-AES0PPPIA2C'
+    'PROCESSOR_REVISION' => '9a03'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'ComSpec' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'TEMP' => 'C:\\Users\\user\\AppData\\Local\\Temp'
+    'WEBIDE_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\webide.vmoptions'
+    'HOMEDRIVE' => 'C:'
+    'USERPROFILE' => 'C:\\Users\\user'
+    'TMP' => 'C:\\Users\\user\\AppData\\Local\\Temp'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'NUMBER_OF_PROCESSORS' => '12'
+    'PHPSTORM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\phpstorm.vmoptions'
+    'SCHEDULER_ASD' => '* * * * * *'
+    'FIG_TERM' => '1'
+    'PROCESS_LAUNCHED_BY_Q' => '1'
+    'PROCESS_LAUNCHED_BY_CW' => '1'
+    'INTELLIJ_TERMINAL_COMMAND_BLOCKS_REWORKED' => '1'
+    'JETBRAINS_INTELLIJ_COMMAND_END_MARKER' => 's2DuvXK2i3DW7dGRgRVA5S5i6cs17GcATbsdywHP4DkFCuiw5rla8LT3bt0xqZZK'
+    'TERMINAL_EMULATOR' => 'JetBrains-JediTerm'
+    'TERM_SESSION_ID' => '77142f7d-78e2-41fd-9f41-08c499cab898'
+    'TERM' => 'xterm'
+    'PHP_SELF' => 'cyii'
+    'SCRIPT_NAME' => 'cyii'
+    'SCRIPT_FILENAME' => 'cyii'
+    'PATH_TRANSLATED' => 'cyii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1754932070.2332
+    'REQUEST_TIME' => 1754932070
+    'argv' => [
+        0 => 'cyii'
+        1 => '--serve'
+    ]
+    'argc' => 2
+]
+2025-08-11 17:10:56 [-][-][-][error][yii\base\InvalidArgumentException] yii\base\InvalidArgumentException: Invalid path alias: @comparison-manager/console/controllers in C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\BaseYii.php:157
+Stack trace:
+#0 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Module.php(264): yii\BaseYii::getAlias()
+#1 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\controllers\HelpController.php(245): yii\base\Module->getControllerPath()
+#2 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\controllers\HelpController.php(172): yii\console\controllers\HelpController->getModuleCommands()
+#3 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\controllers\HelpController.php(192): yii\console\controllers\HelpController->getCommands()
+#4 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\controllers\HelpController.php(292): yii\console\controllers\HelpController->getCommandDescriptions()
+#5 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\controllers\HelpController.php(67): yii\console\controllers\HelpController->getDefaultHelp()
+#6 [internal function]: yii\console\controllers\HelpController->actionIndex()
+#7 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\InlineAction.php(60): call_user_func_array()
+#8 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Controller.php(184): yii\base\InlineAction->runWithParams()
+#9 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Controller.php(180): yii\base\Controller->runAction()
+#10 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Module.php(555): yii\console\Controller->runAction()
+#11 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction()
+#12 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction()
+#13 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Application.php(387): yii\console\Application->handleRequest()
+#14 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\yii(20): yii\base\Application->run()
+#15 {main}
+2025-08-11 17:10:56 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'PSExecutionPolicyPreference' => 'Bypass'
+    'USERDOMAIN_ROAMINGPROFILE' => 'WIN-AES0PPPIA2C'
+    'PROCESSOR_LEVEL' => '6'
+    'POWERSHELL_CUSTOM' => 'C:\\Users\\user\\Documents\\Powershell'
+    'SESSIONNAME' => 'Console'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'GATEWAY_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\gateway.vmoptions'
+    'PSModulePath' => 'C:\\Users\\user\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'RUSTROVER_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rustrover.vmoptions'
+    'SystemDrive' => 'C:'
+    'RIDER_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rider.vmoptions'
+    'USERNAME' => 'user'
+    'DEVECOSTUDIO_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\devecostudio.vmoptions'
+    'STUDIO_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\studio.vmoptions'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'POSH_THEMES_PATH' => 'C:\\Program Files (x86)\\oh-my-posh\\themes\\'
+    'DATASPELL_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\dataspell.vmoptions'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramW6432' => 'C:\\Program Files'
+    'DOTNET_ROOT' => 'C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current'
+    'HOMEPATH' => '\\Users\\user'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 154 Stepping 3, GenuineIntel'
+    'ProgramFiles' => 'C:\\Program Files'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'windir' => 'C:\\WINDOWS'
+    'EFC_13476_1592913036' => '1'
+    'ZES_ENABLE_SYSMAN' => '1'
+    'DATAGRIP_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\datagrip.vmoptions'
+    'POSH_INSTALLER' => 'manual'
+    'IGCCSVC_DB' => 'AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAqR18NgeA3EG5n8Iy+rwumAQAAAACAAAAAAAQZgAAAAEAACAAAACZCyjpm8p6WWGQYwZmcw8GTV2FrR5eDsYXGKBEVJ7TDwAAAAAOgAAAAAIAACAAAAANFu36ANQGmy6ib2H47v8TSiq7R2JCiBNeHq17lxQsHGAAAACfTjgAYirpwnl867e3k/6GksCHGQ4cRxdkQXO7T9MZvZxz+tHxO9vzS6OUf4rqIIV0WOgvcZwpw8XSFU0NFcqrSLhYbDffs1JrTuS7A5y5Xf/PRvcITRA5AiB6DP1x1dVAAAAAyxqelje12OL5N7AQOxpvwmTIbgD1eKMEJcgmi+ZgiUVcuh3Bk5qHVEbLzQpsFR3Bg+hPyeRd4wC8o8BrRMj4fw=='
+    'PHP_INI_SCAN_DIR' => 'C:\\Users\\user\\scoop\\apps\\php\\current\\cli;C:\\Users\\user\\scoop\\apps\\php\\current\\cli\\conf.d;'
+    'LOCALAPPDATA' => 'C:\\Users\\user\\AppData\\Local'
+    'ChocolateyLastPathUpdate' => '133840961734730382'
+    'MSBuildSDKsPath' => 'C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current\\sdk\\8.0.413\\Sdks'
+    'USERDOMAIN' => 'WIN-AES0PPPIA2C'
+    'LOGONSERVER' => '\\\\WIN-AES0PPPIA2C'
+    'PYCHARM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\pycharm.vmoptions'
+    'WEBSTORM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\webstorm.vmoptions'
+    'JAVA_HOME' => 'C:\\Users\\user\\scoop\\apps\\temurin23-jdk\\current'
+    'CLION_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\clion.vmoptions'
+    'JETBRAINSCLIENT_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\jetbrainsclient.vmoptions'
+    'COMPOSER_HOME' => 'C:\\Users\\user\\scoop\\persist\\composer\\home'
+    'GRADLE_HOME' => 'C:\\ProgramData\\chocolatey\\lib\\gradle\\tools\\gradle-8.12.1'
+    'GOLAND_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\goland.vmoptions'
+    'OneDrive' => 'C:\\Users\\user\\OneDrive'
+    'APPDATA' => 'C:\\Users\\user\\AppData\\Roaming'
+    'IDEA_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\idea.vmoptions'
+    'AQUA_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\aqua.vmoptions'
+    'RUBYMINE_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rubymine.vmoptions'
+    'ChocolateyInstall' => 'C:\\ProgramData\\chocolatey'
+    'JETBRAINS_CLIENT_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\jetbrains_client.vmoptions'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'Path' => 'C:\\Users\\user\\scoop\\shims;C:\\Program Files (x86)\\oh-my-posh\\bin\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;C:\\windows\\system32\\HWAudioDriver\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.9\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\WireGuard\\;C:\\Users\\user\\scoop\\apps\\composer\\current\\home\\vendor\\bin;C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current;C:\\Users\\user\\scoop\\apps\\nodejs-lts\\current\\bin;C:\\Users\\user\\scoop\\apps\\nodejs-lts\\current;C:\\Users\\user\\scoop\\apps\\temurin23-jdk\\current\\bin;C:\\Users\\user\\scoop\\shims;C:\\Users\\user\\AppData\\Local\\Microsoft\\WindowsApps;C:\\ProgramData\\chocolatey\\bin;C:\\Users\\user\\AppData\\Local\\JetBrains\\Toolbox\\scripts;C:\\Users\\user\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\user\\.dotnet\\tools'
+    'OS' => 'Windows_NT'
+    'COMPUTERNAME' => 'WIN-AES0PPPIA2C'
+    'PROCESSOR_REVISION' => '9a03'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'ComSpec' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'TEMP' => 'C:\\Users\\user\\AppData\\Local\\Temp'
+    'WEBIDE_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\webide.vmoptions'
+    'HOMEDRIVE' => 'C:'
+    'USERPROFILE' => 'C:\\Users\\user'
+    'TMP' => 'C:\\Users\\user\\AppData\\Local\\Temp'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'NUMBER_OF_PROCESSORS' => '12'
+    'PHPSTORM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\phpstorm.vmoptions'
+    'SCHEDULER_ASD' => '* * * * * *'
+    'FIG_TERM' => '1'
+    'PROCESS_LAUNCHED_BY_Q' => '1'
+    'PROCESS_LAUNCHED_BY_CW' => '1'
+    'INTELLIJ_TERMINAL_COMMAND_BLOCKS_REWORKED' => '1'
+    'JETBRAINS_INTELLIJ_COMMAND_END_MARKER' => 's2DuvXK2i3DW7dGRgRVA5S5i6cs17GcATbsdywHP4DkFCuiw5rla8LT3bt0xqZZK'
+    'TERMINAL_EMULATOR' => 'JetBrains-JediTerm'
+    'TERM_SESSION_ID' => '77142f7d-78e2-41fd-9f41-08c499cab898'
+    'TERM' => 'xterm'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1754932256.8734
+    'REQUEST_TIME' => 1754932256
+    'argv' => [
+        0 => 'yii'
+    ]
+    'argc' => 1
+]
+2025-08-11 17:23:00 [-][-][-][error][yii\console\UnknownCommandException] yii\base\InvalidRouteException: Unable to resolve the request "--serve". in C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Module.php:564
+Stack trace:
+#0 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction()
+#1 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction()
+#2 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Application.php(387): yii\console\Application->handleRequest()
+#3 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\yii(20): yii\base\Application->run()
+#4 {main}
+
+Next yii\console\UnknownCommandException: Unknown command "--serve". in C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php:183
+Stack trace:
+#0 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction()
+#1 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\vendor\yiisoft\yii2\base\Application.php(387): yii\console\Application->handleRequest()
+#2 C:\ProgramRepo\php\jobtests\jobtests-comparison-manager\yii(20): yii\base\Application->run()
+#3 {main}
+2025-08-11 17:23:00 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'PSExecutionPolicyPreference' => 'Bypass'
+    'USERDOMAIN_ROAMINGPROFILE' => 'WIN-AES0PPPIA2C'
+    'PROCESSOR_LEVEL' => '6'
+    'POWERSHELL_CUSTOM' => 'C:\\Users\\user\\Documents\\Powershell'
+    'SESSIONNAME' => 'Console'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'GATEWAY_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\gateway.vmoptions'
+    'PSModulePath' => 'C:\\Users\\user\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'RUSTROVER_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rustrover.vmoptions'
+    'SystemDrive' => 'C:'
+    'RIDER_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rider.vmoptions'
+    'USERNAME' => 'user'
+    'DEVECOSTUDIO_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\devecostudio.vmoptions'
+    'STUDIO_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\studio.vmoptions'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'POSH_THEMES_PATH' => 'C:\\Program Files (x86)\\oh-my-posh\\themes\\'
+    'DATASPELL_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\dataspell.vmoptions'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramW6432' => 'C:\\Program Files'
+    'DOTNET_ROOT' => 'C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current'
+    'HOMEPATH' => '\\Users\\user'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 154 Stepping 3, GenuineIntel'
+    'ProgramFiles' => 'C:\\Program Files'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'windir' => 'C:\\WINDOWS'
+    'EFC_13476_1592913036' => '1'
+    'ZES_ENABLE_SYSMAN' => '1'
+    'DATAGRIP_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\datagrip.vmoptions'
+    'POSH_INSTALLER' => 'manual'
+    'IGCCSVC_DB' => 'AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAqR18NgeA3EG5n8Iy+rwumAQAAAACAAAAAAAQZgAAAAEAACAAAACZCyjpm8p6WWGQYwZmcw8GTV2FrR5eDsYXGKBEVJ7TDwAAAAAOgAAAAAIAACAAAAANFu36ANQGmy6ib2H47v8TSiq7R2JCiBNeHq17lxQsHGAAAACfTjgAYirpwnl867e3k/6GksCHGQ4cRxdkQXO7T9MZvZxz+tHxO9vzS6OUf4rqIIV0WOgvcZwpw8XSFU0NFcqrSLhYbDffs1JrTuS7A5y5Xf/PRvcITRA5AiB6DP1x1dVAAAAAyxqelje12OL5N7AQOxpvwmTIbgD1eKMEJcgmi+ZgiUVcuh3Bk5qHVEbLzQpsFR3Bg+hPyeRd4wC8o8BrRMj4fw=='
+    'PHP_INI_SCAN_DIR' => 'C:\\Users\\user\\scoop\\apps\\php\\current\\cli;C:\\Users\\user\\scoop\\apps\\php\\current\\cli\\conf.d;'
+    'LOCALAPPDATA' => 'C:\\Users\\user\\AppData\\Local'
+    'ChocolateyLastPathUpdate' => '133840961734730382'
+    'MSBuildSDKsPath' => 'C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current\\sdk\\8.0.413\\Sdks'
+    'USERDOMAIN' => 'WIN-AES0PPPIA2C'
+    'LOGONSERVER' => '\\\\WIN-AES0PPPIA2C'
+    'PYCHARM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\pycharm.vmoptions'
+    'WEBSTORM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\webstorm.vmoptions'
+    'JAVA_HOME' => 'C:\\Users\\user\\scoop\\apps\\temurin23-jdk\\current'
+    'CLION_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\clion.vmoptions'
+    'JETBRAINSCLIENT_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\jetbrainsclient.vmoptions'
+    'COMPOSER_HOME' => 'C:\\Users\\user\\scoop\\persist\\composer\\home'
+    'GRADLE_HOME' => 'C:\\ProgramData\\chocolatey\\lib\\gradle\\tools\\gradle-8.12.1'
+    'GOLAND_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\goland.vmoptions'
+    'OneDrive' => 'C:\\Users\\user\\OneDrive'
+    'APPDATA' => 'C:\\Users\\user\\AppData\\Roaming'
+    'IDEA_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\idea.vmoptions'
+    'AQUA_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\aqua.vmoptions'
+    'RUBYMINE_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\rubymine.vmoptions'
+    'ChocolateyInstall' => 'C:\\ProgramData\\chocolatey'
+    'JETBRAINS_CLIENT_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\jetbrains_client.vmoptions'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'Path' => 'C:\\Users\\user\\scoop\\shims;C:\\Program Files (x86)\\oh-my-posh\\bin\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;C:\\windows\\system32\\HWAudioDriver\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.9\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\WireGuard\\;C:\\Users\\user\\scoop\\apps\\composer\\current\\home\\vendor\\bin;C:\\Users\\user\\scoop\\apps\\dotnet-sdk-lts\\current;C:\\Users\\user\\scoop\\apps\\nodejs-lts\\current\\bin;C:\\Users\\user\\scoop\\apps\\nodejs-lts\\current;C:\\Users\\user\\scoop\\apps\\temurin23-jdk\\current\\bin;C:\\Users\\user\\scoop\\shims;C:\\Users\\user\\AppData\\Local\\Microsoft\\WindowsApps;C:\\ProgramData\\chocolatey\\bin;C:\\Users\\user\\AppData\\Local\\JetBrains\\Toolbox\\scripts;C:\\Users\\user\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\user\\.dotnet\\tools'
+    'OS' => 'Windows_NT'
+    'COMPUTERNAME' => 'WIN-AES0PPPIA2C'
+    'PROCESSOR_REVISION' => '9a03'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'ComSpec' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'TEMP' => 'C:\\Users\\user\\AppData\\Local\\Temp'
+    'WEBIDE_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\webide.vmoptions'
+    'HOMEDRIVE' => 'C:'
+    'USERPROFILE' => 'C:\\Users\\user'
+    'TMP' => 'C:\\Users\\user\\AppData\\Local\\Temp'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'NUMBER_OF_PROCESSORS' => '12'
+    'PHPSTORM_VM_OPTIONS' => 'C:\\Users\\user\\Documents\\jetbra\\jetbra-8f6785eac5e6e7e8b20e6174dd28bb19d8da7550\\jetbra\\vmoptions\\phpstorm.vmoptions'
+    'SCHEDULER_ASD' => '* * * * * *'
+    'FIG_TERM' => '1'
+    'PROCESS_LAUNCHED_BY_Q' => '1'
+    'PROCESS_LAUNCHED_BY_CW' => '1'
+    'INTELLIJ_TERMINAL_COMMAND_BLOCKS_REWORKED' => '1'
+    'JETBRAINS_INTELLIJ_COMMAND_END_MARKER' => 's2DuvXK2i3DW7dGRgRVA5S5i6cs17GcATbsdywHP4DkFCuiw5rla8LT3bt0xqZZK'
+    'TERMINAL_EMULATOR' => 'JetBrains-JediTerm'
+    'TERM_SESSION_ID' => '77142f7d-78e2-41fd-9f41-08c499cab898'
+    'TERM' => 'xterm'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1754932980.3454
+    'REQUEST_TIME' => 1754932980
+    'argv' => [
+        0 => 'yii'
+        1 => '--serve'
+    ]
+    'argc' => 2
+]
