@@ -56,7 +56,7 @@ class AddressSrc extends ActiveRecord
         return $this->hasOne(Organization::class, ['id' => 'organization_id']);
     }
 
-    public function getAddressesRef(): ActiveQuery {
-        return $this->hasMany(AddressRef::class, ['src_id' => 'id']);
+    public function getAddressRef(): ActiveQuery {
+        return $this->hasOne(AddressRef::class, ['src_id' => 'id']);
     }
 }
