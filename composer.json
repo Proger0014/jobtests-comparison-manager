@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-          "comparison-manager\\": "src/"
+          "ComparisonManager\\": "src/"
         }
     },
     "config": {
