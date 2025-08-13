@@ -1,10 +1,13 @@
 <?php
 
+use ComparisonManager\common\abstraction\io\InputStream;
+use ComparisonManager\domain\service\CsvInputStream;
+
 return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'comparison-manager\console\controllers',
+    'controllerNamespace' => 'ComparisonManager\console\commands',
     'components' => [
         'log' => [
             'targets' => [
@@ -13,10 +16,6 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],
-        '\yii\console\controllers\ServeController' => [
-            'class' => \yii\console\controllers\ServeController::class,
-            'docroot' => dirname(__DIR__) . '/web/web',
         ]
     ]
 ];

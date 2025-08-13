@@ -37,8 +37,7 @@ return [
             'src/console/runtime'
         ],
         'setExecutable' => [
-            'yii',
-            'wyii'
+            'yii'
         ],
         'setCookieValidationKey' => [
             'src/web/config/main-local.php'
