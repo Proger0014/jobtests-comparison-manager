@@ -2,10 +2,18 @@
 
 namespace ComparisonManager\common\models;
 
+use DateTime;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
+/**
+ * @property-read int $id
+ * @property ?int $organization_id
+ * @property ?string $address
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ */
 class AddressSrc extends ActiveRecord
 {
     /**
@@ -42,14 +50,30 @@ class AddressSrc extends ActiveRecord
                     'id' => AttributeTypecastBehavior::TYPE_INTEGER,
                     'organization_id' => AttributeTypecastBehavior::TYPE_INTEGER,
                     'address' => AttributeTypecastBehavior::TYPE_STRING,
-                    'created_at' => AttributeTypecastBehavior::TYPE_INTEGER,
-                    'updated_at' => AttributeTypecastBehavior::TYPE_INTEGER
+                    'created_at' => AttributeTypecastBehavior::TYPE_STRING,
+                    'updated_at' => AttributeTypecastBehavior::TYPE_STRING
                 ],
                 'typecastAfterValidate' => true,
                 'typecastBeforeSave' => true,
                 'typecastAfterFind' => false
             ]
         ];
+    }
+
+    public function getCreatedAt(): DateTime {
+        return DateTime::createFromFormat('Y-m-d H:i:s', $this->created_at);
+    }
+
+    public function setCreatedAt(DateTime $value) {
+        $this->created_at = $value->format('Y-m-d H:i:s');
+    }
+
+    public function getUpdatedAt(): DateTime {
+        return DateTime::createFromFormat('Y-m-d H:i:s', $this->updated_at);
+    }
+
+    public function setUpdatedAt(DateTime $value) {
+        $this->updated_at = $value->format('Y-m-d H:i:s');
     }
 
     public function getOrganization(): ActiveQuery {

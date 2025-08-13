@@ -3,10 +3,20 @@
 namespace ComparisonManager\common\models;
 
 use ComparisonManager\common\enum\MatchType;
+use DateTime;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
+/**
+ * @property-read int $id
+ * @property int $organization_id
+ * @property string $address
+ * @property int $src_id
+ * @property string $match_type
+ * @property int $match_score
+ * @property string $updated_at
+ */
 class AddressRef extends ActiveRecord
 {
     /**
@@ -47,10 +57,18 @@ class AddressRef extends ActiveRecord
                     'src_id' => AttributeTypecastBehavior::TYPE_INTEGER,
                     'match_type' => AttributeTypecastBehavior::TYPE_STRING,
                     'match_score' => AttributeTypecastBehavior::TYPE_INTEGER,
-                    'updated_at' => AttributeTypecastBehavior::TYPE_INTEGER
+                    'updated_at' => AttributeTypecastBehavior::TYPE_STRING
                 ]
             ]
         ];
+    }
+
+    public function getUpdatedAt(): DateTime {
+        return DateTime::createFromFormat("Y-m-d H:i:s", $this->updated_at);
+    }
+
+    public function setUpdatedAt(DateTime $value) {
+        $this->updated_at = $value->format('Y-m-d H:i:s');
     }
 
     public function getMatchTypeAsEnum(): MatchType {

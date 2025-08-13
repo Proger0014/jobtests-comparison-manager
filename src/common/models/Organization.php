@@ -6,6 +6,10 @@ use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
+/**
+ * @property-read int $id
+ * @property string $name
+ */
 class Organization extends ActiveRecord
 {
     /**
