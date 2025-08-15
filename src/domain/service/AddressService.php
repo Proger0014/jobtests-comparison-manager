@@ -8,8 +8,10 @@ use ComparisonManager\common\enum\MatchType;
 use ComparisonManager\common\models\AddressRef;
 use ComparisonManager\common\models\AddressSrc;
 use ComparisonManager\common\models\Page;
+use ComparisonManager\common\models\ProcessingResult;
 use Yii;
 use yii\db\Exception;
+use yii\helpers\ArrayHelper;
 
 class AddressService
 {
@@ -143,4 +145,180 @@ class AddressService
             $transaction->rollBack();
         }
     }
+
+    public function findManualBindsCount(int $orgId): int {
+        return AddressRef::find()
+            ->where(['organization_id' => $orgId])
+            ->andWhere(['match_type' => MatchType::manual()->getType()])
+            ->count();
+    }
+
+    public function compareAndAutoInstallAddresses(int $orgId, int $threshold, bool $rebindManual): ProcessingResult {
+        $batchSize = 500;
+        $result = new ProcessingResult();
+
+        $inputStr = implode(',', [
+            'orgId' => $orgId,
+            'threshold' . $threshold,
+            'rebindManual' . $rebindManual,
+            'batchSize' . $batchSize,
+        ]);
+
+        Yii::debug("Начало автосопоставления адресов, аргументы: " . $inputStr, __METHOD__);
+
+        $transaction = Yii::$app->getDb()->beginTransaction();
+
+        try {
+            $batchQuery = AddressRef::find()
+                ->where(['organization_id' => $orgId]);
+
+            if (!$rebindManual) {
+                $batchQuery
+                    ->andWhere('!=', ['match_type', MatchType::manual()->getType()]);
+            }
+
+            $batchQuery = $batchQuery->batch($batchSize);
+
+            foreach ($batchQuery as $addressRefBatch) {
+                $this->compareAndAutoInstallBatchHandler($addressRefBatch, $orgId, $threshold, $result);
+            }
+
+            $transaction->commit();
+
+            Yii::debug("Автосопоставление адресов было успешно выполнено, аргументы: " . $inputStr, __METHOD__);
+        } catch (Exception $exception) {
+            Yii::error($exception->getMessage(), __METHOD__);
+            Yii::debug("Неудалось выполнить автосопоставление адресов, аргументы: " . $inputStr, __METHOD__);
+            $transaction->rollBack();
+        }
+
+        return $result;
+    }
+
+    private function compareAndAutoInstallBatchHandler(array $batch, int $orgId, int $threshold, ProcessingResult $result): void {
+        $inputStr = implode(',', [
+            'orgId' => $orgId,
+            'threshold' . $threshold,
+            'batchSize' . count($batch),
+        ]);
+
+        Yii::debug("Сопоставление батча, аргументы: " . $inputStr, __METHOD__);
+
+        $result->processed += count($batch);
+
+        /** @var AddressRef $item */
+        foreach ($batch as $item) {
+            $refAddress = self::normalizeAddress($item->address);
+
+            if ($threshold < 100) {
+                $addressSrcCandidates = AddressSrc::findBySql("SELECT * 
+                                           FROM `addresses_src`
+                                           WHERE MATCH(address) AGAINST (:refAddress)")
+                    ->limit(10)
+                    ->params(['refAddress' => $refAddress])
+                    ->all();
+
+                $candidates = [];
+
+                foreach ($addressSrcCandidates as $srcItem) {
+                    $srcNormalized = self::normalizeAddress($srcItem->address);
+                    $refAddressLength = mb_strlen($refAddress);
+                    $levenshtein = levenshtein($refAddress, $srcNormalized);
+
+                    $score = ($refAddressLength / $levenshtein) * 100;
+
+                    if ($score >= $threshold) {
+                        $candidates[] = [
+                            'src_id' => $srcItem->id,
+                            'score' => $score,
+                        ];
+                    }
+                }
+
+                if (count($addressSrcCandidates) > 0) {
+                    $result->matched++;
+                }
+
+                usort($candidates, function ($a, $b) {
+                    return $b['score'] - $a['score'];
+                });
+
+                if (count($candidates) > 1) {
+                    $first = $candidates[0];
+                    $second = $candidates[1];
+
+                    if (($first['score'] + 5) >= $second['score']) {
+                        $result->auto++;
+
+                        $addressSrc = [
+                            'entity' => array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['id'])[0],
+                            'score' => $first['score']
+                        ];
+                    }
+                } else if (count($candidates) == 1) {
+                    $first = $candidates[0];
+
+                    $result->auto++;
+
+                    $addressSrc = [
+                        'entity' => array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['id'])[0],
+                        'score' => $first['score']
+                    ];
+                }
+            } else {
+                $addressSrc = [
+                    'entity' => AddressSrc::findOne(['address' => $refAddress]),
+                    'score' => 100
+                ];
+            }
+
+            if (!empty($addressSrc)) {
+                $item->src_id = $addressSrc['entity']->id;
+                $item->match_type = MatchType::auto()->getType();
+                $item->match_score = $addressSrc['score'];
+                $item->save();
+            } else {
+                $result->skipped++;
+            }
+        }
+    }
+
+    private static function normalizeAddress(string $address): string {
+        $target = mb_strtolower($address);
+
+        $target = mb_ereg_replace('.', '', $target);
+        $target = trim($target);
+        $targetArray = explode(' ', $target);
+        $newArr = [];
+
+        for ($i = 0; $i < count($targetArray); $i++) {
+            $token = $targetArray[$i];
+
+            $replacement = self::$mapReplacement[$token];
+
+            if ($replacement != null) {
+                if (in_array($replacement, self::$removeSpace)) {
+                    $nextToken = $targetArray[$i+1];
+
+                    $replacement .= $nextToken;
+                }
+
+                $newArr[] = $replacement;
+            } else {
+                $newArr[] = $token;
+            }
+        }
+
+        return implode(' ', $newArr);
+    }
+
+    private static array $removeSpace = ['д', 'к'];
+
+    private static array $mapReplacement = [
+        'улица' => 'ул',
+        'проспект' => 'пр-кт',
+        'дом' => 'д',
+        'корпус' => 'к',
+        'строение' => 'стр'
+    ];
 }

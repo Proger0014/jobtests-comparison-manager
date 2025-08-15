@@ -29,6 +29,8 @@ $this->title = 'Home';
 $data = array_map(fn (Organization $item) => [$item->id => $item->name], $model->organizations)[0];
 ?>
 
+<div id="modal-container"></div>
+
 <div class="container">
     <div class="panel mt-5">
         <div class="d-flex justify-content-between">
@@ -75,6 +77,14 @@ $data = array_map(fn (Organization $item) => [$item->id => $item->name], $model-
 
                     <?php ActiveForm::end() ?>
                 <?php Modal::end(); ?>
+
+                <?= Button::widget([
+                        'id' => 'auto_run_dialog_btn',
+                        'options' => [
+                            'class' => 'ms-2 btn btn-primary',
+                        ],
+                        'label' => 'Автосопоставить'
+                ]) ?>
             </div>
         </div>
         <div class="d-flex align-items-center mt-4">

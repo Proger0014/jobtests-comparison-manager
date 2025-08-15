@@ -138,3 +138,99 @@ function setToUrl(obj) {
 
     window.history.pushState(null, document.title, url);
 }
+
+$(function () {
+    const button = $('#auto_run_dialog_btn');
+
+    const { orgId } = extractFromUrl(['orgId']);
+
+    button.on('click', (e) => {
+        $.ajax({
+            url: 'find-manual-binds-info',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                orgId: orgId
+            }
+        })
+        .done((data) => {
+            if (data.count > 0) {
+                $('#modal-container').html(`
+                <div id="modal-target" class="modal fade" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Пересопоставить ручные записи</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Найдено ${data.count} адресов, которые уже сопоставленые вручную. Желаете их пересопоставить или оставить как есть?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button id="find-manual-info-0" type="button" class="btn btn-primary">Пересопоставить</button>
+                        <button id="find-manual-info-1" type="button" class="btn btn-primary">Оставить</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>`);
+
+                const modal = new bootstrap.Modal('#modal-target');
+
+                modal.show();
+
+                $('#find-manual-info-0').on('click', (e) => {
+                    modal.dispose();
+                    autoRun(orgId, true);
+                });
+
+                $('#find-manual-info-1').on('click', (e) => {
+                    modal.dispose();
+                    autoRun(orgId, false);
+                });
+            } else {
+                autoRun(orgId, false);
+            }
+        });
+    });
+});
+
+function autoRun(orgId, rebindManual) {
+    const { threshold } = extractFromUrl(['threshold']);
+
+    $.ajax({
+        url: 'auto-run',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+            orgId: orgId,
+            threshold: threshold,
+            rebindManual: rebindManual
+        }
+    })
+    .done((data) => {
+        $.pjax.defaults.timeout = false;
+        $.pjax.reload({ container: '#pjax-default' })
+
+        $('#modal-container').html(`
+                <div id="modal-target" class="modal fade" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Результат автосопоставления</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <ul>
+                            <li>Обработано: ${data.processed}</li>
+                            <li></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>`);
+
+        const modal = new bootstrap.Modal('#modal-target');
+
+        modal.show();
+    });
+}

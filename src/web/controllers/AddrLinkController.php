@@ -9,6 +9,7 @@ use ComparisonManager\domain\service\OrganizationService;
 use ComparisonManager\web\models\AddrLinkGridViewModel;
 use ComparisonManager\web\models\AddrLinkIndexModel;
 use ComparisonManager\web\models\AddrLinkLoadAddressForm;
+use ComparisonManager\web\models\BindsInfo;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
@@ -102,5 +103,27 @@ class AddrLinkController extends Controller
         }
 
         return $this->redirect($this->request->referrer);
+    }
+
+    public function actionAutoRun(): Response {
+        $orgId = $this->request->post('orgId');
+        $threshold = $this->request->post('threshold');
+        $rebindManual = $this->request->post('rebindManual');
+
+        $result = $this->addressService->compareAndAutoInstallAddresses($orgId, $threshold, $rebindManual);
+
+        return $this->asJson($result);
+    }
+
+    public function actionFindManualBindsInfo(): Response {
+        $orgId = $this->request->post('orgId');
+
+        $count = $this->addressService->findManualBindsCount($orgId);
+
+        $response = new BindsInfo([
+            'count' => $count,
+        ]);
+
+        return $this->asJson($response);
     }
 }
