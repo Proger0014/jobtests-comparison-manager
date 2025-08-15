@@ -8,8 +8,11 @@ use ComparisonManager\domain\service\AddressService;
 use ComparisonManager\domain\service\OrganizationService;
 use ComparisonManager\web\models\AddrLinkGridViewModel;
 use ComparisonManager\web\models\AddrLinkIndexModel;
+use ComparisonManager\web\models\AddrLinkLoadAddressForm;
+use Yii;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\web\UploadedFile;
 
 class AddrLinkController extends Controller
 {
@@ -83,5 +86,21 @@ class AddrLinkController extends Controller
         $this->addressService->unbind($refId);
 
         return $this->asJson(null);
+    }
+
+    public function actionLoadAddress(): Response {
+
+        if ($this->request->isPost) {
+            $form = new AddrLinkLoadAddressForm();
+            $form->load($this->request->post());
+            $form->csv = UploadedFile::getInstance($form, 'csv');
+            if ($form->validate('csv')) {
+                $this->addressService->loadRefs($form->orgId, $form->csv->tempName);
+            } else {
+                Yii::debug($form->getErrors());
+            }
+        }
+
+        return $this->redirect($this->request->referrer);
     }
 }

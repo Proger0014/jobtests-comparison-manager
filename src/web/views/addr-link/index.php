@@ -5,12 +5,16 @@ use ComparisonManager\common\models\Organization;
 use ComparisonManager\common\util\MatchTypeUtil;
 use ComparisonManager\web\models\AddrLinkGridViewModel;
 use ComparisonManager\web\models\AddrLinkIndexModel;
+use ComparisonManager\web\models\AddrLinkLoadAddressForm;
 use kartik\select2\Select2;
+use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Button;
 use yii\bootstrap5\LinkPager;
+use yii\bootstrap5\Modal;
 use yii\data\ArrayDataProvider;
 use yii\data\Pagination;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\web\View;
 use yii\widgets\MaskedInput;
@@ -28,13 +32,49 @@ $data = array_map(fn (Organization $item) => [$item->id => $item->name], $model-
 <div class="container">
     <div class="panel mt-5">
         <div class="d-flex justify-content-between">
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
                 <label for="organization_select" class="pe-3"><b>Организация:</b> </label>
                 <?= Select2::widget([
                         'id' => 'organization_select',
                         'name' => 'organizations',
                         'data' => $data
                 ]); ?>
+
+                <?php Modal::begin([
+                        'id' => 'address_ref_load_dialog',
+                        'toggleButton' => [
+                                'label' => 'Загрузить адреса',
+                                'class' => 'ms-2 btn btn-primary',
+                        ],
+                        'title' => 'Загрузка адресов',
+
+                ]) ?>
+                    <p>Выберите csv файл ваших адресов:</p>
+
+                    <?php
+                    $modelForm = new AddrLinkLoadAddressForm();
+
+                    $activeForm = ActiveForm::begin([
+                            'action' => Url::to(['addr-link/load-address']),
+                            'method' => 'post',
+                            'options' => [
+                                'enctype' => 'multipart/form-data'
+                            ]
+                    ]) ?>
+
+                        <?= $activeForm->field($modelForm, 'csv')->fileInput()->label('Файл'); ?>
+
+                        <?= $activeForm->field($modelForm, 'orgId')->hiddenInput(['value' => $model->orgId])->label(false); ?>
+
+                        <?= Button::widget([
+                                'options' => [
+                                    'type' => 'submit',
+                                    'class' => 'btn btn-primary',
+                                ]
+                        ]) ?>
+
+                    <?php ActiveForm::end() ?>
+                <?php Modal::end(); ?>
             </div>
         </div>
         <div class="d-flex align-items-center mt-4">

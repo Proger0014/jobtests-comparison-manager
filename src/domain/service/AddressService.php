@@ -3,6 +3,7 @@
 namespace ComparisonManager\domain\service;
 
 use ComparisonManager\common\abstraction\DateTimeProvider;
+use ComparisonManager\common\abstraction\io\InputStream;
 use ComparisonManager\common\enum\MatchType;
 use ComparisonManager\common\models\AddressRef;
 use ComparisonManager\common\models\AddressSrc;
@@ -13,10 +14,14 @@ use yii\db\Exception;
 class AddressService
 {
     private DateTimeProvider $dateTimeProvider;
+    private InputStream $inputStream;
 
-    public function __construct(DateTimeProvider $dateTimeProvider)
+    public function __construct(
+        DateTimeProvider $dateTimeProvider,
+        InputStream $inputStream)
     {
         $this->dateTimeProvider = $dateTimeProvider;
+        $this->inputStream = $inputStream;
     }
 
     public function getRefPage(string $addressSearch, int $orgId, int $page, int $pageSize): Page
@@ -110,5 +115,32 @@ class AddressService
         }
 
         return false;
+    }
+
+    public function loadRefs(int $orgId, string $filePath) {
+        Yii::debug("Начало загрузки адресов для $orgId из $filePath", __METHOD__);
+
+        $transaction = Yii::$app->getDb()->beginTransaction();
+
+        try {
+            $this->inputStream->load($filePath, function ($line) use ($orgId) {
+                $address = $line[0];
+
+                $addressRef = new AddressRef();
+                $addressRef->organization_id = $orgId;
+                $addressRef->address = $address;
+                $addressRef->match_type = MatchType::unmatched()->getType();
+                $addressRef->setUpdatedAt($this->dateTimeProvider->now());
+
+                $addressRef->save();
+            });
+
+            $transaction->commit();
+            Yii::debug("Адреса для $orgId из $filePath были успешно загружены", __METHOD__);
+        } catch (Exception $ex) {
+            Yii::error($ex->getMessage(), __METHOD__);
+            Yii::error("Не удалось загрузить адреса для $orgId из $filePath", __METHOD__);
+            $transaction->rollBack();
+        }
     }
 }
