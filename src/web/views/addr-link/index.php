@@ -66,7 +66,7 @@ $data = array_map(fn (Organization $item) => [$item->id => $item->name], $model-
 
                         <?= $activeForm->field($modelForm, 'csv')->fileInput()->label('Файл'); ?>
 
-                        <?= $activeForm->field($modelForm, 'orgId')->hiddenInput(['value' => $model->orgId])->label(false); ?>
+                        <?= $activeForm->field($modelForm, 'orgId')->hiddenInput(['value' => new JsExpression("extractFromUrl(['orgId']).orgId")])->label(false); ?>
 
                         <?= Button::widget([
                                 'options' => [

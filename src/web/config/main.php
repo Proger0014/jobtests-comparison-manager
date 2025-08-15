@@ -9,6 +9,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'defaultRoute' => 'addr-link/redirect',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-web',

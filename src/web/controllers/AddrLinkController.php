@@ -10,6 +10,7 @@ use ComparisonManager\web\models\AddrLinkGridViewModel;
 use ComparisonManager\web\models\AddrLinkIndexModel;
 use ComparisonManager\web\models\AddrLinkLoadAddressForm;
 use ComparisonManager\web\models\BindsInfo;
+use http\Url;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
@@ -125,5 +126,9 @@ class AddrLinkController extends Controller
         ]);
 
         return $this->asJson($response);
+    }
+
+    public function actionRedirect(): Response {
+        return $this->redirect(\yii\helpers\Url::to(['addr-link/index', 'threshold' => 90]));
     }
 }

@@ -4,7 +4,10 @@ $(function () {
     select.select2();
 
     select.on('select2:select', (e) => {
-        setToUrl({ orgId: e.params.data.id })
+        setToUrl({ orgId: e.params.data.id });
+
+        $.pjax.defaults.timeout = false;
+        $.pjax.reload({ container: '#pjax-default' });
     });
 
     const existsData = select.select2('data')[0];
@@ -209,7 +212,7 @@ function autoRun(orgId, rebindManual) {
     })
     .done((data) => {
         $.pjax.defaults.timeout = false;
-        $.pjax.reload({ container: '#pjax-default' })
+        $.pjax.reload({ container: '#pjax-default' });
 
         $('#modal-container').html(`
                 <div id="modal-target" class="modal fade" tabindex="-1">
