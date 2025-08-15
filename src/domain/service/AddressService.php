@@ -301,6 +301,8 @@ class AddressService
                     $nextToken = $targetArray[$i+1];
 
                     $replacement .= $nextToken;
+
+                    $i++;
                 }
 
                 $newArr[] = $replacement;
