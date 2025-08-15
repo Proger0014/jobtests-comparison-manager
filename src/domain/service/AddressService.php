@@ -276,6 +276,7 @@ class AddressService
                 $item->src_id = $addressSrc['entity']->id;
                 $item->match_type = MatchType::auto()->getType();
                 $item->match_score = $addressSrc['score'];
+                $item->setUpdatedAt($this->dateTimeProvider->now());
                 $item->save();
             } else {
                 $result->skipped++;
