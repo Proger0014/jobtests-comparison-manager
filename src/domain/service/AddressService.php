@@ -11,7 +11,6 @@ use ComparisonManager\common\models\Page;
 use ComparisonManager\common\models\ProcessingResult;
 use Yii;
 use yii\db\Exception;
-use yii\helpers\ArrayHelper;
 
 class AddressService
 {
@@ -157,11 +156,11 @@ class AddressService
         $batchSize = 500;
         $result = new ProcessingResult();
 
-        $inputStr = implode(',', [
-            'orgId' => $orgId,
-            'threshold' . $threshold,
-            'rebindManual' . $rebindManual,
-            'batchSize' . $batchSize,
+        $inputStr = implode(', ', [
+            'orgId => ' . $orgId,
+            'threshold => ' . $threshold,
+            'rebindManual => ' . $rebindManual,
+            'batchSize => ' . $batchSize,
         ]);
 
         Yii::debug("Начало автосопоставления адресов, аргументы: " . $inputStr, __METHOD__);
@@ -170,7 +169,9 @@ class AddressService
 
         try {
             $batchQuery = AddressRef::find()
-                ->where(['organization_id' => $orgId]);
+                ->where(['organization_id' => $orgId])
+                ->where("(src_id IS NULL AND match_type != :matchType)")
+                ->params(['matchType' => MatchType::manual()->getType()]);
 
             if (!$rebindManual) {
                 $batchQuery
@@ -196,10 +197,10 @@ class AddressService
     }
 
     private function compareAndAutoInstallBatchHandler(array $batch, int $orgId, int $threshold, ProcessingResult $result): void {
-        $inputStr = implode(',', [
-            'orgId' => $orgId,
-            'threshold' . $threshold,
-            'batchSize' . count($batch),
+        $inputStr = implode(', ', [
+            'orgId => ' . $orgId,
+            'threshold => ' . $threshold,
+            'batchSize => ' . count($batch),
         ]);
 
         Yii::debug("Сопоставление батча, аргументы: " . $inputStr, __METHOD__);
@@ -225,7 +226,10 @@ class AddressService
                     $refAddressLength = mb_strlen($refAddress);
                     $levenshtein = levenshtein($refAddress, $srcNormalized);
 
-                    $score = ($refAddressLength / $levenshtein) * 100;
+                    $min = min($levenshtein, $refAddressLength);
+                    $max = max($levenshtein, $refAddressLength);
+
+                    $score = ($min / $max) * 100;
 
                     if ($score >= $threshold) {
                         $candidates[] = [
@@ -248,20 +252,17 @@ class AddressService
                     $second = $candidates[1];
 
                     if (($first['score'] + 5) >= $second['score']) {
-                        $result->auto++;
 
                         $addressSrc = [
-                            'entity' => array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['id'])[0],
+                            'entity' => array_values(array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['src_id']))[0],
                             'score' => $first['score']
                         ];
                     }
                 } else if (count($candidates) == 1) {
                     $first = $candidates[0];
 
-                    $result->auto++;
-
                     $addressSrc = [
-                        'entity' => array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['id'])[0],
+                        'entity' => array_values(array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['src_id']))[0],
                         'score' => $first['score']
                     ];
                 }
@@ -272,12 +273,21 @@ class AddressService
                 ];
             }
 
-            if (!empty($addressSrc)) {
-                $item->src_id = $addressSrc['entity']->id;
-                $item->match_type = MatchType::auto()->getType();
-                $item->match_score = $addressSrc['score'];
-                $item->setUpdatedAt($this->dateTimeProvider->now());
-                $item->save();
+            if (!empty($addressSrc) && isset($addressSrc['entity'])) {
+                $entity = $addressSrc['entity'];
+
+                Yii::debug($addressSrc, __METHOD__);
+
+                /** @var $entity AddressSrc */
+                if ($entity->getAddressRef()->one() == null) {
+                    $result->auto++;
+
+                    $item->src_id = $addressSrc['entity']->id;
+                    $item->match_type = MatchType::auto()->getType();
+                    $item->match_score = $addressSrc['score'];
+                    $item->setUpdatedAt($this->dateTimeProvider->now());
+                    $item->save();
+                }
             } else {
                 $result->skipped++;
             }
@@ -287,7 +297,7 @@ class AddressService
     private static function normalizeAddress(string $address): string {
         $target = mb_strtolower($address);
 
-        $target = mb_ereg_replace('.', '', $target);
+        $target = mb_ereg_replace('\.', '', $target);
         $target = trim($target);
         $targetArray = explode(' ', $target);
         $newArr = [];
@@ -295,9 +305,9 @@ class AddressService
         for ($i = 0; $i < count($targetArray); $i++) {
             $token = $targetArray[$i];
 
-            $replacement = self::$mapReplacement[$token];
+            if (array_key_exists($token, self::$mapReplacement)) {
+                $replacement = self::$mapReplacement[$token];
 
-            if ($replacement != null) {
                 if (in_array($replacement, self::$removeSpace)) {
                     $nextToken = $targetArray[$i+1];
 

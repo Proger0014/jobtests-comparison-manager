@@ -221,8 +221,10 @@ function autoRun(orgId, rebindManual) {
                       </div>
                       <div class="modal-body">
                         <ul>
-                            <li>Обработано: ${data.processed}</li>
-                            <li></li>
+                            <li>Обработано строк: ${data.processed}</li>
+                            <li>Найдено подходящих записей: ${data.matched}</li>
+                            <li>Автосопоставлено записей: ${data.auto}</li>
+                            <li>Пропущено записей: ${data.skipped}</li>
                         </ul>
                       </div>
                     </div>
