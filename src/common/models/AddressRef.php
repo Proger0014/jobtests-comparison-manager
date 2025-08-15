@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $address
  * @property int $src_id
  * @property string $match_type
- * @property int $match_score
+ * @property ?int $match_score
  * @property string $updated_at
  */
 class AddressRef extends ActiveRecord

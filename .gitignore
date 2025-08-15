@@ -35,3 +35,8 @@ phpunit.phar
 # ignore generated files
 /src/web/web/index.php
 /src/web/web/robots.txt
+
+# js
+package-lock.json
+package.json
+node_modules
