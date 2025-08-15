@@ -29,7 +29,7 @@ class AddressService
     {
 
         $entities = AddressRef::findBySql("SELECT * FROM `addresses_ref` 
-                                            WHERE organization_id = :orgId AND address LIKE :addressSearch
+                                            WHERE organization_id = :orgId AND address LIKE :addressSearch AND src_id IS NULL
                                             ORDER BY MATCH (address) AGAINST (:addressSearch) DESC")
             ->offset((max($page, 1) - 1) * $pageSize)
             ->limit($pageSize)
