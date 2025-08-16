@@ -239,3 +239,11 @@ function autoRun(orgId, rebindManual) {
         modal.show();
     });
 }
+
+function loadAddressSubmitOverride(form) {
+    $('form#load-address-form').on('submit', (e) => {
+        const { orgId } = extractFromUrl(['orgId']);
+
+        $(`[name="${form}\[orgId\]"]`).first().val(orgId);
+    })
+}

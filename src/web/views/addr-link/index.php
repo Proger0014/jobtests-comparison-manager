@@ -45,8 +45,8 @@ $data = array_map(fn (Organization $item) => [$item->id => $item->name], $model-
                 <?php Modal::begin([
                         'id' => 'address_ref_load_dialog',
                         'toggleButton' => [
-                                'label' => 'Загрузить адреса',
-                                'class' => 'ms-2 btn btn-primary',
+                            'label' => 'Загрузить адреса',
+                            'class' => 'ms-2 btn btn-primary',
                         ],
                         'title' => 'Загрузка адресов',
 
@@ -56,9 +56,12 @@ $data = array_map(fn (Organization $item) => [$item->id => $item->name], $model-
                     <?php
                     $modelForm = new AddrLinkLoadAddressForm();
 
+                    $this->registerJs('loadAddressSubmitOverride("AddrLinkLoadAddressForm");');
+
                     $activeForm = ActiveForm::begin([
                             'action' => Url::to(['addr-link/load-address']),
                             'method' => 'post',
+                            'id' => 'load-address-form',
                             'options' => [
                                 'enctype' => 'multipart/form-data'
                             ]
@@ -66,12 +69,16 @@ $data = array_map(fn (Organization $item) => [$item->id => $item->name], $model-
 
                         <?= $activeForm->field($modelForm, 'csv')->fileInput()->label('Файл'); ?>
 
-                        <?= $activeForm->field($modelForm, 'orgId')->hiddenInput(['value' => new JsExpression("extractFromUrl(['orgId']).orgId")])->label(false); ?>
+                        <?= $activeForm->field($modelForm, 'orgId', ['options' => [
+                                'id-target' => 'load-address'
+                        ]])->hiddenInput(['value' => 0])->label(false); ?>
 
                         <?= Button::widget([
+                                'label' => 'Загрузить',
                                 'options' => [
                                     'type' => 'submit',
                                     'class' => 'btn btn-primary',
+                                    'id' => 'load-address-form-submit'
                                 ]
                         ]) ?>
 

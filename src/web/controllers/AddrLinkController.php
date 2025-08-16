@@ -10,7 +10,6 @@ use ComparisonManager\web\models\AddrLinkGridViewModel;
 use ComparisonManager\web\models\AddrLinkIndexModel;
 use ComparisonManager\web\models\AddrLinkLoadAddressForm;
 use ComparisonManager\web\models\BindsInfo;
-use http\Url;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
@@ -91,7 +90,6 @@ class AddrLinkController extends Controller
     }
 
     public function actionLoadAddress(): Response {
-
         if ($this->request->isPost) {
             $form = new AddrLinkLoadAddressForm();
             $form->load($this->request->post());
