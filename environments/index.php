@@ -42,5 +42,19 @@ return [
         'setCookieValidationKey' => [
             'src/web/config/main-local.php'
         ],
+    ],
+    'Development-docker' => [
+        'path' => 'dev-docker',
+        'setWritable' => [
+            'src/web/runtime',
+            'src/web/web/assets',
+            'src/console/runtime'
+        ],
+        'setExecutable' => [
+            'yii'
+        ],
+        'setCookieValidationKey' => [
+            'src/web/config/main-local.php'
+        ],
     ]
 ];

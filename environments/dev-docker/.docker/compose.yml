@@ -1,0 +1,49 @@
+version: "3.0"
+
+services:
+  scripts:
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+    command: > 
+      /bin/bash -c "php /app/yii migrate --interactive=0 
+      && php /app/yii seeder/seed"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app
+
+  web:
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+    command: >
+      /bin/bash -c "chgrp www-data /app/src/web/web/assets 
+      && chmod g+w /app/src/web/web/assets/ 
+      && apache2-foreground"
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    volumes:
+      - ".htaccess:/etc/apache2/sites-available/000-default.conf"
+    networks:
+      - app
+
+  db:
+    image: mysql:8.4
+    healthcheck:
+      test: ['CMD', 'mysql', '--user=root', '--password=root', '-D', 'db']
+      interval: 2s
+      retries: 10
+      timeout: 60s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
