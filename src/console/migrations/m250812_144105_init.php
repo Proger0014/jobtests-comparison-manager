@@ -41,7 +41,7 @@ class m250812_144105_init extends Migration
             'organization_id' => $this->bigInteger()->null(),
             'address' => $this->text()->notNull(),
             'src_id' => $this->bigInteger()->null(),
-            'match_type' => "ENUM('unmatched', 'auto', 'manual') DEFAULT 'manual'",
+            'match_type' => "ENUM('unmatched', 'auto', 'manual') DEFAULT 'unmatched'",
             'match_score' => $this->tinyInteger()->null(),
             'updated_at' => $this->dateTime()->notNull()
         ]);
