@@ -30,7 +30,7 @@ class CsvInputStream implements InputStream
 
         Yii::debug("Начало построчного чтения $file", __METHOD__);
 
-        while ($line = fgetcsv($file)) {
+        while ($line = fgetcsv($file, null, ';')) {
             call_user_func($lineConsumer, $line);
         }
 
