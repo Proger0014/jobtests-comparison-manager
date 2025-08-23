@@ -37,10 +37,12 @@ $(function() {
 function ajax(params) {
     const { orgId } = extractFromUrl(['orgId']);
 
+    params.page = 1;
+
     return {
         q: params.term,
         orgId: orgId,
-        page: params.page || 1,
+        page: params.page,
         pageSize: 10
     }
 }
@@ -94,15 +96,27 @@ function bindButtonAction(srcId, containerId) {
     });
 }
 
+function getPage(total, currentPage) {
+    if (total === 0) return currentPage;
+
+    const nextPage = currentPage + 1;
+
+    const lastPage = total % 10 > 0
+        ? total / 10 + 1
+        : total / 10;
+
+    return Math.min(Math.floor(lastPage), nextPage);
+}
+
 function ajaxProcessResult(data, params) {
-    params.page = params.page || 1;
+    params.page = getPage(data.total, params.page);
 
     const mapped = Array.from(data.entities).map(e => {
         return {
             id: e.id,
             text: e.address
         }
-    })
+    });
 
     return {
         results: mapped,

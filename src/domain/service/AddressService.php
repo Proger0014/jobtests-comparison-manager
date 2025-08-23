@@ -28,18 +28,29 @@ class AddressService
 
     public function getRefPage(string $addressSearch, int $orgId, int $page, int $pageSize): Page
     {
-
         $entities = AddressRef::findBySql("SELECT * FROM `addresses_ref` 
-                                            WHERE organization_id = :orgId AND address LIKE :addressSearch AND src_id IS NULL
-                                            ORDER BY MATCH (address) AGAINST (:addressSearch) DESC")
-            ->offset((max($page, 1) - 1) * $pageSize)
+                                            WHERE organization_id = :orgId 
+                                              AND address LIKE :addressSearch 
+                                              AND src_id IS NULL
+                                            ORDER BY MATCH (address) AGAINST (:addressSearchRaw) DESC")
+            ->offset(max($page - 1, 1) * $pageSize)
             ->limit($pageSize)
-            ->params(['addressSearch' => '%' . $addressSearch . '%', 'orgId' => $orgId])
+            ->params([
+                'addressSearch' => '%' . $addressSearch . '%',
+                'orgId' => $orgId,
+                'addressSearchRaw' => $addressSearch,
+            ])
             ->all();
 
-        $total = AddressRef::find()
-            ->where(['organization_id' => $orgId])
-            ->count();
+        $total = AddressRef::findBySql("SELECT * FROM `addresses_ref` 
+                                            WHERE organization_id = :orgId 
+                                              AND address LIKE :addressSearch 
+                                              AND src_id IS NULL")
+        ->params([
+            'addressSearch' => '%' . $addressSearch . '%',
+            'orgId' => $orgId
+        ])
+        ->count();
 
         return new Page([
             'entities' => $entities,
