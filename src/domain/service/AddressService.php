@@ -210,66 +210,58 @@ class AddressService
         /** @var AddressRef $item */
         foreach ($batch as $item) {
             $refAddress = self::normalizeAddress($item->address);
+            $refAddressTokens = self::extractTokens($refAddress);
 
-            if ($threshold < 100) {
-                $addressSrcCandidates = AddressSrc::findBySql("SELECT * 
-                                           FROM `addresses_src`
-                                           WHERE MATCH(address) AGAINST (:refAddress)")
-                    ->limit(10)
-                    ->params(['refAddress' => $refAddress])
-                    ->all();
+            $addressSrcCandidates = AddressSrc::findBySql("SELECT * 
+                                       FROM `addresses_src`
+                                       WHERE MATCH(address) AGAINST (:refAddress)")
+                ->limit(10)
+                ->params(['refAddress' => $refAddress])
+                ->all();
 
-                $candidates = [];
+            $candidates = [];
 
-                foreach ($addressSrcCandidates as $srcItem) {
-                    $srcNormalized = self::normalizeAddress($srcItem->address);
-                    $refAddressLength = mb_strlen($refAddress);
-                    $levenshtein = levenshtein($refAddress, $srcNormalized);
+            foreach ($addressSrcCandidates as $srcItem) {
+                $srcNormalized = self::normalizeAddress($srcItem->address);
+                $srcAddressTokens = self::extractTokens($srcNormalized);
 
-                    $min = min($levenshtein, $refAddressLength);
-                    $max = max($levenshtein, $refAddressLength);
+                $intersectAddressTokens = array_intersect_assoc($srcAddressTokens, $refAddressTokens);
 
-                    $score = ($min / $max) * 100;
+                $score = (count($intersectAddressTokens) / count($srcAddressTokens)) * 100;
 
-                    if ($score >= $threshold) {
-                        $candidates[] = [
-                            'src_id' => $srcItem->id,
-                            'score' => $score,
-                        ];
-                    }
+                if ($score >= $threshold) {
+                    $candidates[] = [
+                        'src_id' => $srcItem->id,
+                        'score' => $score,
+                    ];
                 }
+            }
 
-                if (count($addressSrcCandidates) > 0) {
-                    $result->matched++;
-                }
+            if (count($addressSrcCandidates) > 0) {
+                $result->matched++;
+            }
 
-                usort($candidates, function ($a, $b) {
-                    return $b['score'] - $a['score'];
-                });
+            usort($candidates, function ($a, $b) {
+                return $b['score'] - $a['score'];
+            });
 
-                if (count($candidates) > 1) {
-                    $first = $candidates[0];
-                    $second = $candidates[1];
+            if (count($candidates) > 1) {
+                $first = $candidates[0];
+                $second = $candidates[1];
 
-                    if (($first['score'] + 5) >= $second['score']) {
-
-                        $addressSrc = [
-                            'entity' => array_values(array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['src_id']))[0],
-                            'score' => $first['score']
-                        ];
-                    }
-                } else if (count($candidates) == 1) {
-                    $first = $candidates[0];
+                if (($first['score'] + 5) >= $second['score']) {
 
                     $addressSrc = [
                         'entity' => array_values(array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['src_id']))[0],
                         'score' => $first['score']
                     ];
                 }
-            } else {
+            } else if (count($candidates) == 1) {
+                $first = $candidates[0];
+
                 $addressSrc = [
-                    'entity' => AddressSrc::findOne(['address' => $refAddress]),
-                    'score' => 100
+                    'entity' => array_values(array_filter($addressSrcCandidates, fn ($it) => $it->id == $first['src_id']))[0],
+                    'score' => $first['score']
                 ];
             }
 
@@ -298,9 +290,12 @@ class AddressService
         $target = mb_strtolower($address);
 
         $target = mb_ereg_replace('\.', '', $target);
+        $target = mb_ereg_replace(',', '', $target);
         $target = trim($target);
         $targetArray = explode(' ', $target);
         $newArr = [];
+        $startLine = self::$mapReplacement['^'];
+        $endLine = self::$mapReplacement['$'];
 
         for ($i = 0; $i < count($targetArray); $i++) {
             $token = $targetArray[$i];
@@ -317,6 +312,16 @@ class AddressService
                 }
 
                 $newArr[] = $replacement;
+            } elseif ($i == 0 && !in_array($startLine, $newArr)) {
+                $replacement = $startLine;
+
+                $newArr[] = $replacement;
+                $newArr[] = $token;
+            } elseif ($i == count($targetArray) - 1 && !in_array($endLine, $newArr)) {
+                $replacement = $endLine;
+
+                $newArr[] = $replacement;
+                $newArr[] = $token;
             } else {
                 $newArr[] = $token;
             }
@@ -325,13 +330,53 @@ class AddressService
         return implode(' ', $newArr);
     }
 
+    private static function extractTokens(string $address): array {
+        $result = [];
+
+        $target = explode(' ', $address);
+
+        for ($i = 0; $i < count($target);) {
+            $token = $target[$i];
+
+            if (in_array($token, self::$tokensScore)) {
+                $result[$token] = [];
+                $nextToken = $target[++$i] ?? null;
+                while (!in_array($nextToken, self::$tokensScore) && $i < count($target)) {
+                    if ($nextToken) {
+                        $result[$token][] = $nextToken;
+                    }
+
+                    $i++;
+                    $nextToken = $target[$i] ?? null;
+                }
+
+                $result[$token] = implode(' ', $result[$token]);
+            } else {
+                $i++;
+            }
+        }
+
+        return $result;
+    }
+
+    private static array $tokensScore = [
+        'ул',
+        'пр-кт',
+        'д',
+        'к',
+        'стр'
+    ];
+
     private static array $removeSpace = ['д', 'к'];
 
     private static array $mapReplacement = [
+        '^' => 'ул',
         'улица' => 'ул',
         'проспект' => 'пр-кт',
         'дом' => 'д',
         'корпус' => 'к',
-        'строение' => 'стр'
+        'строение' => 'стр',
+        'литера' => 'стр',
+        '$' => 'стр'
     ];
 }
