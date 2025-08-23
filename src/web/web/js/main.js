@@ -35,7 +35,7 @@ $(function() {
 });
 
 function ajax(params) {
-    const { orgId } = extractFromUrl(['orgId', 'page', 'pageSize']);
+    const { orgId } = extractFromUrl(['orgId']);
 
     return {
         q: params.term,
