@@ -327,6 +327,21 @@ class AddressService
             }
         }
 
+        $houseIndex = array_search('д', $newArr);
+        $houseConcreteIndex = $houseIndex + 1;
+        $houseConcrete = $newArr[$houseConcreteIndex];
+
+        $houseParts = explode('/', $houseConcrete);
+
+        if (count($houseParts) == 2) {
+            $newArr[$houseConcreteIndex] = $houseParts[0];
+
+            $left = array_slice($newArr, 0, $houseConcreteIndex + 1);
+            $right = array_slice($newArr, $houseConcreteIndex + 1);
+            $newArr = array_merge($left, ['к', $houseParts[1]], $right);
+        }
+
+
         return implode(' ', $newArr);
     }
 
