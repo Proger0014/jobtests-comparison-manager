@@ -1,0 +1,10 @@
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/schema/9.5.xsd"
+         bootstrap="tests/e2e/bootstrap.php"
+         colors="true">
+    <testsuites>
+        <testsuite name="e2e">
+            <directory>tests/e2e</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
